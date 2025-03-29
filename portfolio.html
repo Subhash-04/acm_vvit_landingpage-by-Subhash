@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Subhash Mandalapu - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #1e1e2f;
+      color: #eee;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      position: relative;
+    }
+    header {
+      background: #2d2d44;
+      padding: 20px 0;
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    header nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    header nav a:hover {
+      color: #d4af37;
+    }
+    .profile-section {
+      text-align: center;
+      padding-top: 100px;
+    }
+    .profile-pic {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      display: block;
+      margin: 30px auto;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .profile-pic:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+    section {
+      padding: 100px 0;
+    }
+    section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #d4af37;
+      text-shadow: 0 0 5px #d4af37;
+    }
+    .about-me {
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ddd;
+    }
+    .projects, .skills, .certifications {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .project, .skill, .certification {
+      background: #2d2d44;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .project:hover, .skill:hover, .certification:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    }
+    .project h3, .skill h3, .certification h3 {
+      color: #d4af37;
+      text-shadow: 0 0 5px #d4af37;
+    }
+    .certification {
+      position: relative;
+      overflow: hidden;
+    }
+    .certification:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      animation: rotateBG 10s infinite linear;
+      z-index: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .certification:hover:before {
+      opacity: 0.8;
+    }
+    .certification h3 {
+      position: relative;
+      z-index: 2;
+    }
+    .contact-info {
+      background: #2d2d44;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .contact-info p {
+      margin: 0;
+    }
+    footer {
+      background: #1e1e2f;
+      color: #ddd;
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid #444;
+    }
+    .neon {
+      text-shadow: 0 0 10px #d4af37,
+                   0 0 20px #d4af37,
+                   0 0 30px #d4af37,
+                   0 0 40px #d4af37,
+                   0 0 50px #d4af37;
+    }
+    /* Scroll-to-Top Button */
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      font-size: 18px;
+      background: #d4af37;
+      color: #1e1e2f;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #scrollTopBtn:hover {
+      opacity: 0.9;
+      transform: translateY(-5px);
+    }
+    /* Dark/Light Mode Toggle */
+    #themeToggle {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      background: #d4af37;
+      color: #1e1e2f;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #themeToggle:hover {
+      opacity: 0.9;
+      transform: translateY(-5px);
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #2d2d44;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+    .modal-header {
+      font-size: 24px;
+      color: #d4af37;
+      text-shadow: 0 0 5px #d4af37;
+      margin-bottom: 10px;
+    }
+    .close {
+      color: #ddd;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: #d4af37;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+    </nav>
+  </div>
+</header>
+
+<div id="themeToggle">Light Mode</div>
+
+<section id="about">
+  <div class="container">
+    <div class="profile-section">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ14HKyNKKxEHs4memxs7VoPLVE9CrILqarg&s" alt="Profile Picture" class="profile-pic">
+      <h1 class="neon">Subhash Mandalapu</h1>
+      <p class="about-me">
+        I am a student passionate about web development. I've completed the CS50 Web Development course from Harvard University and an internship at Remarskill, where I worked on creating responsive web applications. I enjoy tackling new challenges in the tech world and am dedicated to creating user-friendly web experiences. I am always eager to learn the latest technologies and apply them to real-world projects.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project" onclick="openModal('recipeShare')">
+        <h3>Recipe Share</h3>
+        <p>A platform for sharing and discovering new recipes. Users can like, follow, add, and delete recipes.</p>
+      </div>
+      <div class="project" onclick="openModal('responsiveApp')">
+        <h3>Responsive Web Application</h3>
+        <p>Developed a responsive web application with a focus on user experience and accessibility.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill"><h3>HTML</h3></div>
+      <div class="skill"><h3>CSS</h3></div>
+      <div class="skill"><h3>JavaScript</h3></div>
+      <div class="skill"><h3>User Authentication</h3></div>
+      <div class="skill"><h3>Responsive Design</h3></div>
+      <div class="skill"><h3>UI/UX Design</h3></div>
+      <div class="skill"><h3>Front-end Development</h3></div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="container">
+    <h2>Certifications</h2>
+    <div class="certifications">
+      <div class="certification" onclick="showCertificate('cs50')">
+        <h3>CS50W and CS50X from Harvard University</h3>
+      </div>
+      <div class="certification" onclick="showCertificate('remarskill')">
+        <h3>Web Development from Remarskills</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certificate Modal -->
+<div id="certificateModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCertificateModal()">&times;</span>
+    <iframe id="certificateFrame" src="" width="100%" height="500px" style="border: none;"></iframe>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="container">
+    <h2>Contact Me</h2>
+    <div class="contact-info">
+      <p>Email: subhashmandalapu04@gmail.com</p>
+      <p>Phone: +91 9014470659</p>
+    </div>
+  </div>
+</section>
+
+<button id="scrollTopBtn">Top</button>
+
+<!-- Project Details Modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <!-- Close button for project modal -->
+    <span class="close" id="projectClose">&times;</span>
+    <div class="modal-header" id="modalHeader"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2024 Subhash Mandalapu</p>
+  </div>
+</footer>
+
+<script>
+  // Smooth Scrolling
+  document.querySelectorAll('header nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // Scroll-to-Top Button
+  var scrollTopBtn = document.getElementById("scrollTopBtn");
+  window.onscroll = function() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+  scrollTopBtn.onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Project Modal
+  var projectModal = document.getElementById("myModal");
+  var modalHeader = document.getElementById("modalHeader");
+  var modalBody = document.getElementById("modalBody");
+  var projectClose = document.getElementById("projectClose");
+
+  function openModal(projectName) {
+    if (projectName === 'recipeShare') {
+      modalHeader.textContent = "Recipe Share";
+      modalBody.textContent = "Recipe Share is a platform where users can log in, view shared recipes, like and follow other users, add new recipes, and delete their own recipes.";
+    } else if (projectName === 'responsiveApp') {
+      modalHeader.textContent = "Responsive Web App";
+      modalBody.textContent = "A fully responsive web application developed during my internship at Remarskill. It showcases my ability to create user-friendly and aesthetically pleasing web pages.";
+    }
+    projectModal.style.display = "block";
+  }
+
+  projectClose.onclick = function() {
+    projectModal.style.display = "none";
+  };
+
+  // Certificate Modal
+  const certificateModal = document.getElementById("certificateModal");
+  const certificateFrame = document.getElementById("certificateFrame");
+
+  function showCertificate(certificate) {
+    
+    if (certificate === "cs50") {
+      certificateFrame.src = "./pdfs/ProfessionalCertificate_CS50.pdf";
+    } else if (certificate === "remarskill") {
+      certificateFrame.src = "./pdfs/InternshipLetter_Remarskill.pdf";
+    }
+    certificateModal.style.display = "block";
+  }
+
+  function closeCertificateModal() {
+    certificateModal.style.display = "none";
+
+  }
+
+  // Use a single click event to close either modal if clicking outside them
+  window.addEventListener('click', function(event) {
+    // Close project modal if clicked outside
+    if (event.target == projectModal) {
+      projectModal.style.display = "none";
+    }
+    // Close certificate modal if clicked outside
+    if (event.target == certificateModal) {
+      closeCertificateModal();
+    }
+  });
+</script>
+
+</body>
+</html>
